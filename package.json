@@ -1,0 +1,20 @@
+{
+    "name": "extract-text-webpack-plugin",
+    "version": "0.0.1",
+    "author": "Samuel R. Neff",
+    "description": "Generate index.tsx for directories of svg files",
+    "license": "MIT",
+    "homepage": "https://github.com/samuelneff/webpack-svg-to-tsx",
+    "scripts": {},
+    "dependencies": {
+    },
+    "devDependencies": {},
+    "main": "index.js",
+    "engines": {
+        "node": ">= 8.9.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/samuelneff/webpack-svg-to-tsx.git"
+    }
+}
