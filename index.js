@@ -2,8 +2,8 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const defaultHeader = `
-/* tslint:disable:max-line-length jsx-alignment */
+const defaultHeader =
+`/* tslint:disable:max-line-length jsx-alignment */
 import React from 'react';
 
 interface SvgProps {
@@ -14,7 +14,8 @@ interface SvgProps {
 function createSvgComponent(componentName, propsInterfaceName, svgContent) {
   return `export const ${componentName}:React.StatelessComponent<${propsInterfaceName}> = props => (
   ${svgContent}
-);`
+);
+`
 }
 
 const defaults = {
@@ -156,7 +157,7 @@ class WebpackSvgToTsx {
 
     svgToComponent(componentName, className, content) {
         try {
-            const {EOL, propsInterfaceName, templateFn, uniqueClassNames, uniqueId} = this.options;
+            const {addClassName, EOL, propsInterfaceName, templateFn, uniqueClassNames, uniqueId} = this.options;
 
             if (uniqueId) {
                 content = this.makeIdUnique(className, content);
@@ -228,11 +229,11 @@ class WebpackSvgToTsx {
         return svgText.replace(/<svg/, `<svg className={\`${componentClassName} \${props.className || ''}\`}`);
     }
 
-    adjustClassAttributes(componentName, svgText) {
+    adjustClassAttributes(svgText) {
         return svgText.replace(/ class=/g, ' className=');
     }
 
-    adjustStyleContent(componentName, svgText) {
+    adjustStyleContent(svgText) {
         return svgText.replace(/<style>/g, '<style dangerouslySetInnerHTML={{__html: `')
                       .replace(/<\/style>/g, '`}} />');
     }
