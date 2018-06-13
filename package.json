@@ -1,5 +1,5 @@
 {
-    "name": "extract-text-webpack-plugin",
+    "name": "webpack-svg-to-tsx",
     "version": "0.0.1",
     "author": "Samuel R. Neff",
     "description": "Generate index.tsx for directories of svg files",
