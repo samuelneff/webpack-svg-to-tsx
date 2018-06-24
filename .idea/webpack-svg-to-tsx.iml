@@ -2,8 +2,25 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/01-simple/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/02-custom-header/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/03-custom-outfile/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/04-default-directories/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/05-custom-directories/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/06-multiple-directories/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/07-props-interface-name/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/08-eol/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/09-template-fn/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/10-unique-class-names/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/11-unique-class-names-off/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/12-unique-id/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/13-unique-id-off/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/14-watcher-change/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/15-watcher-add/test-out" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/cases/16-watcher-remove/test-out" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
