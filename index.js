@@ -220,7 +220,7 @@ class WebpackSvgToTsx {
     }
 
     makeIdUnique(className, svgText) {
-        return svgText.replace(/ (id=['"])([^'"]+)(['"])/g, (ignore, start, prevId, end) => `${start}${className}-${prevId}${end}`);
+        return svgText.replace(/( id=['"])([^'"]+)(['"])/g, (ignore, start, prevId, end) => `${start}${className}-${prevId}${end}`);
     }
 
     makeClassesUnique(componentClassName, svgText) {
