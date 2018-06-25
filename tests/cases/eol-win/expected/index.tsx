@@ -1,7 +1,3 @@
-// TEST NOT IMPLEMENTED YET
-
-
-
 /* tslint:disable:max-line-length jsx-alignment */
 import React from 'react';
 

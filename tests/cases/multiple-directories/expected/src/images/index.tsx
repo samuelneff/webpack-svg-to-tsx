@@ -6,9 +6,9 @@ interface SvgProps {
 }
 
 export const C:React.StatelessComponent<SvgProps> = props => (
-    <svg className={`c ${props.className || ''}`} name="c" />
+  <svg className={`c ${props.className || ''}`} name="c" />
 );
 
 export const D:React.StatelessComponent<SvgProps> = props => (
-    <svg className={`d ${props.className || ''}`} name="d" />
+  <svg className={`d ${props.className || ''}`} name="d" />
 );
