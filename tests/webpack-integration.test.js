@@ -5,21 +5,38 @@ const svgToTsxPlugin = require('..');
 
 require('./expect-extensions');
 
+const defaultSvgToTsxExtensions = {
+    postProcessActualContent: echo,
+    postProcessExpectedContent: echo,
+    postProcessSvgToTsxOptions: echo
+};
+
 const cases = process.env.CASES ? process.env.CASES.split(',') : fs.readdirSync(path.join(__dirname, 'cases'));
 
 describe('Webpack Integration Tests', () => cases.forEach(testCase => describe(testCase, () => runCase(testCase))));
-
 
 function runCase(testCase) {
 
     const testDirectory = path.join(__dirname, 'cases', testCase);
     const outputDirectory = path.join(testDirectory, 'test-out');
     const svgToTsxOptionsFile = path.join(testDirectory, 'svg-to-tsx-options.json');
+    const svgToTsxExtensionsFile = path.join(testDirectory, 'svg-to-tsx-extensions.js');
+
+    const {
+        postProcessActualContent,
+        postProcessExpectedContent,
+        postProcessSvgToTsxOptions
+    } =
+        fs.existsSync(svgToTsxExtensionsFile)
+        ? Object.assign({}, defaultSvgToTsxExtensions, require(svgToTsxExtensionsFile))
+        : defaultSvgToTsxExtensions;
 
     const svgToTsxOptions =
-        fs.existsSync(svgToTsxOptionsFile)
-            ? JSON.parse(fs.readFileSync(svgToTsxOptionsFile, 'utf-8'))
-            : {};
+        postProcessSvgToTsxOptions(
+            fs.existsSync(svgToTsxOptionsFile)
+                ? JSON.parse(fs.readFileSync(svgToTsxOptionsFile, 'utf-8'))
+                : {}
+        );
 
     if (svgToTsxOptions.directories === undefined) {
         svgToTsxOptions.directories = [ './' ];
@@ -99,9 +116,9 @@ function runCase(testCase) {
                     () =>
                         expect(
                             actual && actual.isFile()
-                                ? fs.readFileSync(actualSubPath, 'utf-8')
+                                ? postProcessActualContent(fs.readFileSync(actualSubPath, 'utf-8'))
                                 : ''
-                        ).toEqual(fs.readFileSync(expectedSubPath, 'utf-8')));
+                        ).toEqual(postProcessExpectedContent(fs.readFileSync(expectedSubPath, 'utf-8'))));
             } else {
                 testExpectedDirectory(actualSubPath, expectedSubPath);
             }
@@ -114,4 +131,8 @@ function readdirStatsSync(directory) {
     const lookup = {};
     subs.forEach(sub => lookup[sub] = fs.statSync(path.join(directory, sub)));
     return lookup;
+}
+
+function echo(arg) {
+    return arg;
 }
