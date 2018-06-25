@@ -8,15 +8,13 @@ import React from 'react';
 
 interface ${propsInterfaceName} {
     className:string;
-}
-`
+}`
 }
 
 function createSvgComponent(componentName, propsInterfaceName, svgContent) {
   return `export const ${componentName}:React.StatelessComponent<${propsInterfaceName}> = props => (
   ${svgContent}
-);
-`
+);`;
 }
 
 const defaults = {
@@ -189,7 +187,7 @@ class WebpackSvgToTsx {
             parts.push(this.svgToComponent(componentName, className, content));
         });
 
-        const newIndexContent = parts.join('\n').replace(/\r?\n/g, EOL);
+        const newIndexContent = (parts.join('\n\n') + '\n').replace(/\r?\n/g, EOL);
         return newIndexContent === oldIndexContent
                ? null
                : newIndexContent;
