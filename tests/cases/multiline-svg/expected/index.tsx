@@ -7,12 +7,12 @@ interface SvgProps {
 
 export const A:React.StatelessComponent<SvgProps> = props => (
   <svg className={`a ${props.className || ''}`} name="a">
-    <path />
-</svg>
+      <path />
+  </svg>
 );
 
 export const B:React.StatelessComponent<SvgProps> = props => (
   <svg className={`b ${props.className || ''}`} name="b">
-    <path />
-</svg>
+      <path />
+  </svg>
 );

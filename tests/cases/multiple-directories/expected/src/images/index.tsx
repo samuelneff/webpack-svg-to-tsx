@@ -5,10 +5,10 @@ interface SvgProps {
     className:string;
 }
 
-export const A:React.StatelessComponent<SvgProps> = props => (
-    <svg className={`a ${props.className || ''}`} name="a" />
+export const C:React.StatelessComponent<SvgProps> = props => (
+    <svg className={`c ${props.className || ''}`} name="c" />
 );
 
-export const B:React.StatelessComponent<SvgProps> = props => (
-    <svg className={`b ${props.className || ''}`} name="b" />
+export const D:React.StatelessComponent<SvgProps> = props => (
+    <svg className={`d ${props.className || ''}`} name="d" />
 );

@@ -64,5 +64,6 @@ typings/
 .idea/workspace.xml
 
 # test files
-tests/cases/*/index.tsx
+tests/cases/*/*.tsx
+tests/cases/*/src/**/*.tsx
 tests/cases/*/test-out

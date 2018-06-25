@@ -1,2 +1,6 @@
 {
+    "directories": [
+        "src/icons",
+        "src/images"
+    ]
 }
