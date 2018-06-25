@@ -2,14 +2,15 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const defaultHeader =
-`/* tslint:disable:max-line-length jsx-alignment */
+function defaultHeader(propsInterfaceName) {
+    return `/* tslint:disable:max-line-length jsx-alignment */
 import React from 'react';
 
-interface SvgProps {
+interface ${propsInterfaceName} {
     className:string;
 }
-`;
+`
+}
 
 function createSvgComponent(componentName, propsInterfaceName, svgContent) {
   return `export const ${componentName}:React.StatelessComponent<${propsInterfaceName}> = props => (
@@ -38,6 +39,45 @@ class WebpackSvgToTsx {
         this.options = Object.assign({}, defaults, options);
         this.apply = this.apply.bind(this);
         this.lastBuildTime = 0;
+        this.validateOptions();
+    }
+
+    validateOptions() {
+        const {
+            outFile,
+            directories,
+            header,
+            propsInterfaceName,
+            EOL,
+            templateFn
+        } = this.options;
+        if (typeof outFile !== 'string') {
+            throw new Error('WebpackSvgToTsx invalid options: outFile must be string, received: ' + String(outFile));
+        }
+        if (!Array.isArray(directories)) {
+            throw new Error('WebpackSvgToTsx invalid options: directories must be an array of strings, received: ' + String(directories));
+        }
+        if (directories.length === 0) {
+            options.directories = defaults.directories.slice();
+        }
+        if (directories.some(d => typeof d !== 'string')) {
+            throw new Error('WebpackSvgToTsx invalid options: directories must be an array of strings, received: ' + directories.map(d => typeof d).join(','));
+        }
+        const headerType = typeof header;
+        if (headerType === 'string') {
+            this.options.header = () => header;
+        } else if (headerType !== 'function') {
+            throw new Error('WebpackSvgToTsx invalid options: header must be string or function, received: ' + String(header));
+        }
+        if (typeof propsInterfaceName !== 'string') {
+            throw new Error('WebpackSvgToTsx invalid options: propsInterfaceName must be string, received: ' + String(propsInterfaceName));
+        }
+        if (typeof EOL !== 'string') {
+            throw new Error('WebpackSvgToTsx invalid options: EOL must be string, received: ' + String(EOL));
+        }
+        if (typeof templateFn !== 'function') {
+            throw new Error('WebpackSvgToTsx invalid options: templateFn must be function, received: ' + String(templateFn));
+        }
     }
 
     apply(compiler) {
@@ -129,8 +169,8 @@ class WebpackSvgToTsx {
     }
 
     createIndexFile(contents) {
-        const { EOL, outFile } = this.options;
-        const parts = [ this.options.header ];
+        const { EOL, header, outFile, propsInterfaceName } = this.options;
+        const parts = [ header(propsInterfaceName) ];
         const oldIndexContent = contents[outFile];
         Object.keys(contents).sort().forEach(file => {
             const content = contents[file].trim();
